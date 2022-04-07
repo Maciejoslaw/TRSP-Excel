@@ -1,0 +1,164 @@
+Sub sumujKody()
+
+Dim kod As String
+Dim hamulec As String
+Dim czas As Date
+Dim j As Double
+Dim ileWierszy As Double
+Dim test As String
+Dim czasDublarka As Date
+Dim czasFis As Date
+Dim czasJoh As Date
+Dim czasKA As Date
+Dim czasKb As Date
+Dim czasKKS As Date
+Dim czasLW5 As Date
+Dim czasMars As Date
+Dim czasNar As Date
+Dim czasNC As Date
+Dim czasP01 As Date
+Dim czasR1 As Date
+Dim czasR2 As Date
+Dim czasR3 As Date
+Dim czasR4 As Date
+Dim czasR5 As Date
+Dim czasRozc As Date
+Dim czasN1200 As Date
+Dim wyszukanieKodu As String
+Dim wynik As Integer
+Dim dataPoczatk, dataKoncowa, czasMin, czasMax As Date
+
+
+Application.ScreenUpdating = False
+Application.Calculation = xlManual
+
+j = 2
+
+ileWierszy = 1
+    Sheets("Wyniki").Select
+    Cells.Select
+    Selection.ClearContents
+
+Do
+
+    ileWierszy = ileWierszy + 1
+
+Loop Until (Sheets("TRAZA").Cells(ileWierszy, 1).Value = "")
+
+    Sheets("TRAZA").Select
+    Columns("D:D").Select
+    Selection.Copy
+    Sheets("Wyniki").Select
+    Columns("A:A").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Application.CutCopyMode = False
+    ActiveSheet.Range("$c$1:$c$25000").RemoveDuplicates Columns:=1, Header:= _
+        xlNo
+
+'zliczanie czasów PIL
+    Do
+    
+        kod = Sheets("Wyniki").Cells(j, 1).Value
+        For wierszSprawdzany = 2 To ileWierszy
+            
+            If Sheets("TRAZA").Cells(wierszSprawdzany, 20).Value > Sheets("TRSP").Cells(14, 1).Value Then
+                If Sheets("TRAZA").Cells(wierszSprawdzany, 20).Value < Sheets("TRSP").Cells(16, 1).Value Then
+                  If Sheets("TRAZA").Cells(wierszSprawdzany, 4).Value = kod Then
+
+                    maszyna = Sheets("TRAZA").Cells(wierszSprawdzany, 5).Value
+                        Select Case maszyna
+                        Case "P_DUB"
+                        czasDublarka = czasDublarka + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_FIS"
+                        czasFis = czasFis + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_JOH"
+                        czasJoh = czasJoh + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_K_A"
+                        czasKA = czasKA + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_K_BC"
+                        czasKb = czasKb + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_KKS1"
+                        czasKKS = czasKKS + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_LW5"
+                        czasLW5 = czasLW5 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_MARS"
+                        czasMars = czasMars + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_NAR"
+                        czasNar = czasNar + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_NC1"
+                        czasNC = czasNC + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_P01"
+                        czasP01 = czasP01 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROB1"
+                        czasR1 = czasR1 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROB2"
+                        czasR2 = czasR2 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROB3"
+                        czasR3 = czasR3 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROB4"
+                        czasR4 = czasR4 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROB5"
+                        czasR5 = czasR5 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROB6"
+                        czasR6 = czasR6 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "P_ROZK"
+                        czasRozc = czasRozc + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        Case "PN1200"
+                        czasN1200 = czasN1200 + Sheets("TRAZA").Cells(wierszSprawdzany, 7).Value
+                        
+                        
+                        End Select
+                        End If
+                    End If
+                End If
+
+        Next
+        
+               
+        Sheets("Wyniki").Cells(j, 2) = czasDublarka
+        czasDublarka = 0
+        Sheets("Wyniki").Cells(j, 3) = czasFis
+        czasFis = 0
+        Sheets("Wyniki").Cells(j, 4) = czasJoh
+        czasJoh = 0
+        Sheets("Wyniki").Cells(j, 5) = czasKA
+        czasKA = 0
+        Sheets("Wyniki").Cells(j, 6) = czasKKS
+        czasKKS = 0
+        Sheets("Wyniki").Cells(j, 7) = czasLW5
+        czasLW5 = 0
+        Sheets("Wyniki").Cells(j, 8) = czasMars
+        czasMars = 0
+        Sheets("Wyniki").Cells(j, 9) = czasNar
+        czasNar = 0
+        Sheets("Wyniki").Cells(j, 10) = czasNC
+        czasNC = 0
+        Sheets("Wyniki").Cells(j, 11) = czasP01
+        czasP01 = 0
+        Sheets("Wyniki").Cells(j, 12) = czasR1
+        czasR1 = 0
+        Sheets("Wyniki").Cells(j, 13) = czasR2
+        czasR2 = 0
+        Sheets("Wyniki").Cells(j, 14) = czasR3
+        czasR3 = 0
+        Sheets("Wyniki").Cells(j, 15) = czasR4
+        czasR4 = 0
+        Sheets("Wyniki").Cells(j, 16) = czasR5
+        czasR5 = 0
+        Sheets("Wyniki").Cells(j, 17) = czasR6
+        czasR6 = 0
+        Sheets("Wyniki").Cells(j, 18) = czasRozc
+        czasRozc = 0
+        Sheets("Wyniki").Cells(j, 19) = czasN1200
+        czasN1200 = 0
+
+    j = j + 1
+    Loop Until (Sheets("Wyniki").Cells(j, 1).Value = "")
+    Sheets("TRSP").Range("B1", "S1").Copy Sheets("Wyniki").Range("B1", "S1")
+    
+Application.ScreenUpdating = True
+Application.Calculation = xlAutomatic
+
+End Sub
+
